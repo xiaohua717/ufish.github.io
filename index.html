@@ -93,11 +93,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>###前言<br>supervisor就是Python开发的一套通用的进程管理程序，能将一个普通的命令行进行变为后台daemon，并监控进程状态，异常退出时能自动启动。</p>
+<p>###如何安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># pip install supervisor</span></div></pre></td></tr></table></figure></p>
+<p>###创建Configuration文件<br>使用<code>echo_supervisord_conf</code>命令可以在终端输出默认的配置信息，此时重定向到我们要的文件便可，如下所示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</span></div></pre></td></tr></table></figure></p>
+<p>###启动supervisord<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># supervisord -c /etc/supervisor/supervisord.conf</span></div></pre></td></tr></table></figure></p>
+<p>###Sample<br>要让supervisor来管理我们开发的应用程序，就需要为我们的程序编写一个配置文件。每个进程的配置文件都可以单独分拆，放在<code>/etc/supervisor/conf.d/</code>目录下，以<code>.conf</code>作为扩展名。</p>
+<p>例如，app.conf定义了一个gunicorn的进程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[program:app]</div><div class="line">command=/usr/bin/gunicorn -w 1 wsgiapp:application</div><div class="line">directory=/home/myproject</div><div class="line">user=www-data</div></pre></td></tr></table></figure></p>
+<p>进程app定义在<code>[program:app]</code>，<strong>app</strong>这个名称我们自定义，下面的启动命令会使用到<br><code>directory</code>是进程的当前目录<br><code>user</code>是进程运行的用户身份</p>
+<p>运行命令<strong>supervisorctl</strong><br>启动进程:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># supervisorctl start app</span></div></pre></td></tr></table></figure></p>
+<p>停止进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># supervisorctl stop app</span></div></pre></td></tr></table></figure></p>
+<p>查询状态<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># supervisorctl status app</span></div></pre></td></tr></table></figure></p>
+<p>更多详细内容，请前往官网<a href="http://www.supervisord.org/" target="_blank" rel="external">http://www.supervisord.org/</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/23/Linux后台进程管理利器：supervisor/" data-id="cj7x6ff4c00016vp5cgy66xd0" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/23/Linux后台进程管理利器：supervisor/" data-id="cj7x6n23u00018kp57xchj5ah" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/23/hello-world/" data-id="cj7x6ff4600006vp5oy9ywyuv" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/23/hello-world/" data-id="cj7x6n23p00008kp5zo4x00ge" class="article-share-link">Share</a>
       
       
     </footer>
