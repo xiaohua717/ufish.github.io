@@ -67,6 +67,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS-UIButton文字居左显示" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/26/iOS-UIButton文字居左显示/" class="article-date">
+  <time datetime="2017-09-26T13:46:44.000Z" itemprop="datePublished">2017-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/移动端/">移动端</a>►<a class="article-category-link" href="/categories/移动端/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/26/iOS-UIButton文字居左显示/">iOS-UIButton文字居左显示</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先看一下UIButton文字水平对齐的属性，以及有哪些枚举值<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// how to position content hozontally inside control. default is center</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>) <span class="built_in">UIControlContentHorizontalAlignment</span> contentHorizontalAlignment;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UIControlContentHorizontalAlignment</span>) &#123;</div><div class="line">	<span class="built_in">UIControlContentHorizontalAlignmentCenter</span> = <span class="number">0</span>,</div><div class="line">	<span class="built_in">UIControlContentHorizontalAlignmentLeft</span> = <span class="number">1</span>,</div><div class="line">	<span class="built_in">UIControlContentHorizontalAlignmentRight</span> = <span class="number">2</span>,</div><div class="line">	<span class="built_in">UIControlContentHorizontalAlignmentFill</span> = <span class="number">3</span>,</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>设置UIButton字体居左显示<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.contentHorizontalAlignment = <span class="built_in">UIControlContentHorizontalAlignmentLeft</span>;</div></pre></td></tr></table></figure></p>
+<p>设置button的title距左边10个像素的距离<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.titleEdgeInsets = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// UIEdgeInsetsMake(top, left, bottom, right)</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2017/09/26/iOS-UIButton文字居左显示/" data-id="cj81nulmy0000zzp5pdj004ki" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于xcode9编译出现Static-assert错误" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/26/关于xcode9编译出现Static-assert错误/" class="article-date">
+  <time datetime="2017-09-26T13:28:36.000Z" itemprop="datePublished">2017-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/移动端/">移动端</a>►<a class="article-category-link" href="/categories/移动端/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/26/关于xcode9编译出现Static-assert错误/">关于xcode9编译出现Static_assert错误</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg); </p>
+<p><img src="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png" alt="截图"></p>
+<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># pod update CocoaLumberjack</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/" data-id="cj81nulnr0008zzp59oqeufm3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux后台进程管理利器：supervisor" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/23/Linux后台进程管理利器：supervisor/" class="article-date">
@@ -117,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/23/Linux后台进程管理利器：supervisor/" data-id="cj80ya3ah0001jrp5fw3ixh9n" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/23/Linux后台进程管理利器：supervisor/" data-id="cj81nulnm0005zzp5g3yf180e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/23/hello-world/" data-id="cj80ya3a70000jrp5xrn0dw19" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/23/hello-world/" data-id="cj81nulnp0006zzp50q4j51tj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +268,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">2</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -197,7 +283,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -208,6 +294,14 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/26/iOS-UIButton文字居左显示/">iOS-UIButton文字居左显示</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/关于xcode9编译出现Static-assert错误/">关于xcode9编译出现Static_assert错误</a>
+          </li>
         
           <li>
             <a href="/2017/09/23/Linux后台进程管理利器：supervisor/">Linux后台进程管理利器：supervisor</a>
