@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS-block的基础用法 | 捕鱼的蜘蛛侠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介Block是一种比较特殊的数据类型。可以保存一段代码，在合适的时候取出来调用。 定义格式 &amp;amp;&amp;amp; 如何调用返回值类型(^block变量名)（形参列表) = ^(形参列表) {// 代码段}; block变量名(实参); 默认情况下，Block内部不能修改外面的局部变量Block内部可以修改使用_block修饰的局部变量 简单用法举例1、无参数 无返回值的Block12345voi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS-block的基础用法">
+<meta property="og:url" content="http://u-fish.cn/2017/09/28/iOS-block的基础用法/index.html">
+<meta property="og:site_name" content="捕鱼的蜘蛛侠">
+<meta property="og:description" content="简介Block是一种比较特殊的数据类型。可以保存一段代码，在合适的时候取出来调用。 定义格式 &amp;amp;&amp;amp; 如何调用返回值类型(^block变量名)（形参列表) = ^(形参列表) {// 代码段}; block变量名(实参); 默认情况下，Block内部不能修改外面的局部变量Block内部可以修改使用_block修饰的局部变量 简单用法举例1、无参数 无返回值的Block12345voi">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-27T16:24:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS-block的基础用法">
+<meta name="twitter:description" content="简介Block是一种比较特殊的数据类型。可以保存一段代码，在合适的时候取出来调用。 定义格式 &amp;amp;&amp;amp; 如何调用返回值类型(^block变量名)（形参列表) = ^(形参列表) {// 代码段}; block变量名(实参); 默认情况下，Block内部不能修改外面的局部变量Block内部可以修改使用_block修饰的局部变量 简单用法举例1、无参数 无返回值的Block12345voi">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">捕鱼的蜘蛛侠</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">和平年代，跨界就业</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/categories/移动端">移动端</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://u-fish.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-iOS-block的基础用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/28/iOS-block的基础用法/" class="article-date">
+  <time datetime="2017-09-27T16:09:57.000Z" itemprop="datePublished">2017-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/移动端/">移动端</a>►<a class="article-category-link" href="/categories/移动端/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS-block的基础用法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Block是一种比较特殊的数据类型。可以保存一段代码，在合适的时候取出来调用。</p>
+<h3 id="定义格式-amp-amp-如何调用"><a href="#定义格式-amp-amp-如何调用" class="headerlink" title="定义格式 &amp;&amp; 如何调用"></a>定义格式 &amp;&amp; 如何调用</h3><p>返回值类型(^block变量名)（形参列表) = ^(形参列表) {<br>// 代码段<br>};</p>
+<p>block变量名(实参);</p>
+<p><strong>默认情况下，Block内部不能修改外面的局部变量</strong><br><strong>Block内部可以修改使用_block修饰的局部变量</strong></p>
+<h3 id="简单用法举例"><a href="#简单用法举例" class="headerlink" title="简单用法举例"></a>简单用法举例</h3><h4 id="1、无参数-无返回值的Block"><a href="#1、无参数-无返回值的Block" class="headerlink" title="1、无参数 无返回值的Block"></a>1、无参数 无返回值的Block</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (^emptyBlock)() = ^() &#123;</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"---"</span>);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">emptyBlock();</div></pre></td></tr></table></figure>
+<h4 id="2、有参数-无返回值的Block"><a href="#2、有参数-无返回值的Block" class="headerlink" title="2、有参数 无返回值的Block"></a>2、有参数 无返回值的Block</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (^sumBlock)(<span class="keyword">int</span>, <span class="keyword">int</span>) = ^(<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123;</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"%d + %d = %d"</span>, a, b, a+b)</div><div class="line">&#125;;</div><div class="line"></div><div class="line">sumBlock(<span class="number">10</span>, <span class="number">10</span>)</div></pre></td></tr></table></figure>
+<h4 id="3、有参数-有返回值的Block"><a href="#3、有参数-有返回值的Block" class="headerlink" title="3、有参数 有返回值的Block"></a>3、有参数 有返回值的Block</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span>* (^logBlock)(<span class="built_in">NSString</span> *,<span class="built_in">NSString</span> *) = ^(<span class="built_in">NSString</span> * str1,<span class="built_in">NSString</span> *str2)&#123;</div><div class="line">	<span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@%@"</span>,str1,str2];</div><div class="line">&#125;;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, logBlock(<span class="string">@"我是"</span>,<span class="string">@"Block"</span>));</div></pre></td></tr></table></figure>
+<h3 id="Block结合typedef使用"><a href="#Block结合typedef使用" class="headerlink" title="Block结合typedef使用"></a>Block结合typedef使用</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^doSomething)(<span class="keyword">id</span>);</div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) doSomething singing;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2017/09/28/iOS-block的基础用法/" data-id="cj838nj2q0005qnp5ld1yf632" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">iOS-枚举类型 NS_ENUM, NS_OPTIONS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">5</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/28/iOS-block的基础用法/">iOS-block的基础用法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/">iOS-枚举类型 NS_ENUM, NS_OPTIONS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/">iOS-UITableViewCell选中时上面的View看不见</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/iOS-UIButton文字居左显示/">iOS-UIButton文字居左显示</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/关于xcode9编译出现Static-assert错误/">关于xcode9编译出现Static_assert错误</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xiaohua<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/categories/移动端" class="mobile-nav-link">移动端</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

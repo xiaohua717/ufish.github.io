@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于xcode9编译出现Static_assert错误 | 捕鱼的蜘蛛侠</title>
+  <title>iOS-UITableViewCell选中时上面的View看不见 | 捕鱼的蜘蛛侠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
+  <meta name="description" content="现象cell被选中时，cell上面的view全部都看不见，即时有给view设置颜色 官方文档UITableViewCell changes the background color of all sub views when cell is selected or highlighted.意思就是说当UITableViewCell被选中或者高亮的时候，它的所有子view的颜色都会改变。 解决方法重">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于xcode9编译出现Static_assert错误">
-<meta property="og:url" content="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/index.html">
+<meta property="og:title" content="iOS-UITableViewCell选中时上面的View看不见">
+<meta property="og:url" content="http://u-fish.cn/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/index.html">
 <meta property="og:site_name" content="捕鱼的蜘蛛侠">
-<meta property="og:description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
+<meta property="og:description" content="现象cell被选中时，cell上面的view全部都看不见，即时有给view设置颜色 官方文档UITableViewCell changes the background color of all sub views when cell is selected or highlighted.意思就是说当UITableViewCell被选中或者高亮的时候，它的所有子view的颜色都会改变。 解决方法重">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png">
-<meta property="og:updated_time" content="2017-09-26T13:44:06.000Z">
+<meta property="og:updated_time" content="2017-09-27T15:52:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于xcode9编译出现Static_assert错误">
-<meta name="twitter:description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
-<meta name="twitter:image" content="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png">
+<meta name="twitter:title" content="iOS-UITableViewCell选中时上面的View看不见">
+<meta name="twitter:description" content="现象cell被选中时，cell上面的view全部都看不见，即时有给view设置颜色 官方文档UITableViewCell changes the background color of all sub views when cell is selected or highlighted.意思就是说当UITableViewCell被选中或者高亮的时候，它的所有子view的颜色都会改变。 解决方法重">
   
   
     <link rel="icon" href="/favicon.png">
@@ -68,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-关于xcode9编译出现Static-assert错误" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-iOS-UITableViewCell选中时上面的View看不见" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/09/26/关于xcode9编译出现Static-assert错误/" class="article-date">
-  <time datetime="2017-09-26T13:28:36.000Z" itemprop="datePublished">2017-09-26</time>
+    <a href="/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/" class="article-date">
+  <time datetime="2017-09-27T15:43:10.000Z" itemprop="datePublished">2017-09-27</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于xcode9编译出现Static_assert错误
+      iOS-UITableViewCell选中时上面的View看不见
     </h1>
   
 
@@ -94,14 +92,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg); </p>
-<p><img src="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png" alt="截图"></p>
-<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># pod update CocoaLumberjack</span></div></pre></td></tr></table></figure>
+        <h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>cell被选中时，cell上面的view全部都看不见，即时有给view设置颜色</p>
+<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><p>UITableViewCell changes the background color of all sub views when cell is selected or highlighted.<br>意思就是说当UITableViewCell被选中或者高亮的时候，它的所有子view的颜色都会改变。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>重写UITableViewCell的两个方法</p>
+<pre><code class="objectivec">- (<span class="keyword">void</span>) setHighlighted:(<span class="built_in">BOOL</span>)highlighted animated:(<span class="built_in">BOOL</span>)animated {
+    [<span class="keyword">super</span> setHighlighted:highlighted animated:animated];
+
+    <span class="keyword">self</span>.testview.backgroundColor = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// 你要保持不变的view</span>
+}
+
+- (<span class="keyword">void</span>) setSelected:(<span class="built_in">BOOL</span>)selected animated:(<span class="built_in">BOOL</span>)animated {
+    [<span class="keyword">super</span> setSelected:selected animated:animated];
+
+    <span class="keyword">self</span>.testview.backgroundColor = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// 你要保持不变的view</span>
+}
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/" data-id="cj838nj2t0008qnp53ktwlb5n" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/" data-id="cj838nj2l0004qnp52201rmnc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,19 +120,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/09/26/iOS-UIButton文字居左显示/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          iOS-UIButton文字居左显示
+          iOS-枚举类型 NS_ENUM, NS_OPTIONS
         
       </div>
     </a>
   
   
-    <a href="/2017/09/23/Linux后台进程管理利器：supervisor/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/09/26/iOS-UIButton文字居左显示/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Linux后台进程管理利器：supervisor</div>
+      <div class="article-nav-title">iOS-UIButton文字居左显示</div>
     </a>
   
 </nav>

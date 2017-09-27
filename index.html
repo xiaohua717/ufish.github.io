@@ -67,6 +67,150 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS-block的基础用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/28/iOS-block的基础用法/" class="article-date">
+  <time datetime="2017-09-27T16:09:57.000Z" itemprop="datePublished">2017-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/移动端/">移动端</a>►<a class="article-category-link" href="/categories/移动端/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/28/iOS-block的基础用法/">iOS-block的基础用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Block是一种比较特殊的数据类型。可以保存一段代码，在合适的时候取出来调用。</p>
+<h3 id="定义格式-amp-amp-如何调用"><a href="#定义格式-amp-amp-如何调用" class="headerlink" title="定义格式 &amp;&amp; 如何调用"></a>定义格式 &amp;&amp; 如何调用</h3><p>返回值类型(^block变量名)（形参列表) = ^(形参列表) {<br>// 代码段<br>};</p>
+<p>block变量名(实参);</p>
+<p><strong>默认情况下，Block内部不能修改外面的局部变量</strong><br><strong>Block内部可以修改使用_block修饰的局部变量</strong></p>
+<h3 id="简单用法举例"><a href="#简单用法举例" class="headerlink" title="简单用法举例"></a>简单用法举例</h3><h4 id="1、无参数-无返回值的Block"><a href="#1、无参数-无返回值的Block" class="headerlink" title="1、无参数 无返回值的Block"></a>1、无参数 无返回值的Block</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (^emptyBlock)() = ^() &#123;</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"---"</span>);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">emptyBlock();</div></pre></td></tr></table></figure>
+<h4 id="2、有参数-无返回值的Block"><a href="#2、有参数-无返回值的Block" class="headerlink" title="2、有参数 无返回值的Block"></a>2、有参数 无返回值的Block</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (^sumBlock)(<span class="keyword">int</span>, <span class="keyword">int</span>) = ^(<span class="keyword">int</span> a, <span class="keyword">int</span> b) &#123;</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"%d + %d = %d"</span>, a, b, a+b)</div><div class="line">&#125;;</div><div class="line"></div><div class="line">sumBlock(<span class="number">10</span>, <span class="number">10</span>)</div></pre></td></tr></table></figure>
+<h4 id="3、有参数-有返回值的Block"><a href="#3、有参数-有返回值的Block" class="headerlink" title="3、有参数 有返回值的Block"></a>3、有参数 有返回值的Block</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span>* (^logBlock)(<span class="built_in">NSString</span> *,<span class="built_in">NSString</span> *) = ^(<span class="built_in">NSString</span> * str1,<span class="built_in">NSString</span> *str2)&#123;</div><div class="line">	<span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@%@"</span>,str1,str2];</div><div class="line">&#125;;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, logBlock(<span class="string">@"我是"</span>,<span class="string">@"Block"</span>));</div></pre></td></tr></table></figure>
+<h3 id="Block结合typedef使用"><a href="#Block结合typedef使用" class="headerlink" title="Block结合typedef使用"></a>Block结合typedef使用</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^doSomething)(<span class="keyword">id</span>);</div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) doSomething singing;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2017/09/28/iOS-block的基础用法/" data-id="cj838nj2q0005qnp5ld1yf632" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/" class="article-date">
+  <time datetime="2017-09-27T15:58:40.000Z" itemprop="datePublished">2017-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/移动端/">移动端</a>►<a class="article-category-link" href="/categories/移动端/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/">iOS-枚举类型 NS_ENUM, NS_OPTIONS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在开发Mac、iOS程序中，最好所有的枚举都用“NS_ENUM”和”NS_OPTIONS”定义，保证统一。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//NS_ENUM，定义状态等普通枚举</span></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSUInteger</span>, TTGState) &#123;</div><div class="line">    TTGStateOK = <span class="number">0</span>,</div><div class="line">    TTGStateError,</div><div class="line">    TTGStateUnknow</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//NS_OPTIONS，定义选项</span></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSUInteger</span>, TTGDirection) &#123;</div><div class="line">    TTGDirectionNone = <span class="number">0</span>,</div><div class="line">    TTGDirectionTop = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</div><div class="line">    TTGDirectionLeft = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</div><div class="line">    TTGDirectionRight = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</div><div class="line">    TTGDirectionBottom = <span class="number">1</span> &lt;&lt; <span class="number">3</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/" data-id="cj838nj2s0007qnp5v2cv9167" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS-UITableViewCell选中时上面的View看不见" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/" class="article-date">
+  <time datetime="2017-09-27T15:43:10.000Z" itemprop="datePublished">2017-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/移动端/">移动端</a>►<a class="article-category-link" href="/categories/移动端/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/">iOS-UITableViewCell选中时上面的View看不见</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>cell被选中时，cell上面的view全部都看不见，即时有给view设置颜色</p>
+<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><p>UITableViewCell changes the background color of all sub views when cell is selected or highlighted.<br>意思就是说当UITableViewCell被选中或者高亮的时候，它的所有子view的颜色都会改变。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>重写UITableViewCell的两个方法</p>
+<pre><code class="objectivec">- (<span class="keyword">void</span>) setHighlighted:(<span class="built_in">BOOL</span>)highlighted animated:(<span class="built_in">BOOL</span>)animated {
+    [<span class="keyword">super</span> setHighlighted:highlighted animated:animated];
+
+    <span class="keyword">self</span>.testview.backgroundColor = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// 你要保持不变的view</span>
+}
+
+- (<span class="keyword">void</span>) setSelected:(<span class="built_in">BOOL</span>)selected animated:(<span class="built_in">BOOL</span>)animated {
+    [<span class="keyword">super</span> setSelected:selected animated:animated];
+
+    <span class="keyword">self</span>.testview.backgroundColor = [<span class="built_in">UIColor</span> redColor]; <span class="comment">// 你要保持不变的view</span>
+}
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/" data-id="cj838nj2l0004qnp52201rmnc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-iOS-UIButton文字居左显示" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/26/iOS-UIButton文字居左显示/" class="article-date">
@@ -100,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/26/iOS-UIButton文字居左显示/" data-id="cj81nulmy0000zzp5pdj004ki" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/26/iOS-UIButton文字居左显示/" data-id="cj838nj2b0001qnp5bz9wyd3i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/" data-id="cj81nulnr0008zzp59oqeufm3" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/" data-id="cj838nj2t0008qnp53ktwlb5n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/23/Linux后台进程管理利器：supervisor/" data-id="cj81nulnm0005zzp5g3yf180e" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/23/Linux后台进程管理利器：supervisor/" data-id="cj838nj260000qnp5y77fu03t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -249,7 +393,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/23/hello-world/" data-id="cj81nulnp0006zzp50q4j51tj" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/23/hello-world/" data-id="cj838nj2j0003qnp589p5zb8d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,7 +412,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">2</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">5</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -283,7 +427,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -296,19 +440,23 @@
       <ul>
         
           <li>
+            <a href="/2017/09/28/iOS-block的基础用法/">iOS-block的基础用法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/">iOS-枚举类型 NS_ENUM, NS_OPTIONS</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/">iOS-UITableViewCell选中时上面的View看不见</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/26/iOS-UIButton文字居左显示/">iOS-UIButton文字居左显示</a>
           </li>
         
           <li>
             <a href="/2017/09/26/关于xcode9编译出现Static-assert错误/">关于xcode9编译出现Static_assert错误</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/23/Linux后台进程管理利器：supervisor/">Linux后台进程管理利器：supervisor</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/23/hello-world/">Hello World</a>
           </li>
         
       </ul>

@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于xcode9编译出现Static_assert错误 | 捕鱼的蜘蛛侠</title>
+  <title>iOS-枚举类型 NS_ENUM, NS_OPTIONS | 捕鱼的蜘蛛侠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
+  <meta name="description" content="在开发Mac、iOS程序中，最好所有的枚举都用“NS_ENUM”和”NS_OPTIONS”定义，保证统一。123456789101112131415//NS_ENUM，定义状态等普通枚举typedef NS_ENUM(NSUInteger, TTGState) &amp;#123;    TTGStateOK = 0,    TTGStateError,    TTGStateUnknow&amp;#125;;/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于xcode9编译出现Static_assert错误">
-<meta property="og:url" content="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/index.html">
+<meta property="og:title" content="iOS-枚举类型 NS_ENUM, NS_OPTIONS">
+<meta property="og:url" content="http://u-fish.cn/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/index.html">
 <meta property="og:site_name" content="捕鱼的蜘蛛侠">
-<meta property="og:description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
+<meta property="og:description" content="在开发Mac、iOS程序中，最好所有的枚举都用“NS_ENUM”和”NS_OPTIONS”定义，保证统一。123456789101112131415//NS_ENUM，定义状态等普通枚举typedef NS_ENUM(NSUInteger, TTGState) &amp;#123;    TTGStateOK = 0,    TTGStateError,    TTGStateUnknow&amp;#125;;/">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png">
-<meta property="og:updated_time" content="2017-09-26T13:44:06.000Z">
+<meta property="og:updated_time" content="2017-09-27T16:06:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于xcode9编译出现Static_assert错误">
-<meta name="twitter:description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
-<meta name="twitter:image" content="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png">
+<meta name="twitter:title" content="iOS-枚举类型 NS_ENUM, NS_OPTIONS">
+<meta name="twitter:description" content="在开发Mac、iOS程序中，最好所有的枚举都用“NS_ENUM”和”NS_OPTIONS”定义，保证统一。123456789101112131415//NS_ENUM，定义状态等普通枚举typedef NS_ENUM(NSUInteger, TTGState) &amp;#123;    TTGStateOK = 0,    TTGStateError,    TTGStateUnknow&amp;#125;;/">
   
   
     <link rel="icon" href="/favicon.png">
@@ -68,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-关于xcode9编译出现Static-assert错误" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/09/26/关于xcode9编译出现Static-assert错误/" class="article-date">
-  <time datetime="2017-09-26T13:28:36.000Z" itemprop="datePublished">2017-09-26</time>
+    <a href="/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/" class="article-date">
+  <time datetime="2017-09-27T15:58:40.000Z" itemprop="datePublished">2017-09-27</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于xcode9编译出现Static_assert错误
+      iOS-枚举类型 NS_ENUM, NS_OPTIONS
     </h1>
   
 
@@ -94,14 +92,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg); </p>
-<p><img src="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png" alt="截图"></p>
-<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># pod update CocoaLumberjack</span></div></pre></td></tr></table></figure>
+        <p>在开发Mac、iOS程序中，最好所有的枚举都用“NS_ENUM”和”NS_OPTIONS”定义，保证统一。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//NS_ENUM，定义状态等普通枚举</span></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSUInteger</span>, TTGState) &#123;</div><div class="line">    TTGStateOK = <span class="number">0</span>,</div><div class="line">    TTGStateError,</div><div class="line">    TTGStateUnknow</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//NS_OPTIONS，定义选项</span></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSUInteger</span>, TTGDirection) &#123;</div><div class="line">    TTGDirectionNone = <span class="number">0</span>,</div><div class="line">    TTGDirectionTop = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</div><div class="line">    TTGDirectionLeft = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,</div><div class="line">    TTGDirectionRight = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,</div><div class="line">    TTGDirectionBottom = <span class="number">1</span> &lt;&lt; <span class="number">3</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/" data-id="cj838nj2t0008qnp53ktwlb5n" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/" data-id="cj838nj2s0007qnp5v2cv9167" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,19 +106,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/09/26/iOS-UIButton文字居左显示/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/28/iOS-block的基础用法/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          iOS-UIButton文字居左显示
+          iOS-block的基础用法
         
       </div>
     </a>
   
   
-    <a href="/2017/09/23/Linux后台进程管理利器：supervisor/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Linux后台进程管理利器：supervisor</div>
+      <div class="article-nav-title">iOS-UITableViewCell选中时上面的View看不见</div>
     </a>
   
 </nav>
