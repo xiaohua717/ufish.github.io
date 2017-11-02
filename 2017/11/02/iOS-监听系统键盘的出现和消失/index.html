@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于xcode9编译出现Static_assert错误 | 捕鱼的蜘蛛侠</title>
+  <title>iOS监听系统键盘的出现和消失 | 捕鱼的蜘蛛侠</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
+  <meta name="description" content="1234567891011121314151617181920//注册键盘出现的通知[[NSNotificationCenter defaultCenter] addObserver:self                                         selector:@selector(keyboardWillShown:)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于xcode9编译出现Static_assert错误">
-<meta property="og:url" content="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/index.html">
+<meta property="og:title" content="iOS监听系统键盘的出现和消失">
+<meta property="og:url" content="http://u-fish.cn/2017/11/02/iOS-监听系统键盘的出现和消失/index.html">
 <meta property="og:site_name" content="捕鱼的蜘蛛侠">
-<meta property="og:description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
+<meta property="og:description" content="1234567891011121314151617181920//注册键盘出现的通知[[NSNotificationCenter defaultCenter] addObserver:self                                         selector:@selector(keyboardWillShown:)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png">
-<meta property="og:updated_time" content="2017-09-26T13:44:06.000Z">
+<meta property="og:updated_time" content="2017-11-02T11:05:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于xcode9编译出现Static_assert错误">
-<meta name="twitter:description" content="现象xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg);   解决方案：1# pod update CocoaLumberjack">
-<meta name="twitter:image" content="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png">
+<meta name="twitter:title" content="iOS监听系统键盘的出现和消失">
+<meta name="twitter:description" content="1234567891011121314151617181920//注册键盘出现的通知[[NSNotificationCenter defaultCenter] addObserver:self                                         selector:@selector(keyboardWillShown:)">
   
   
     <link rel="icon" href="/favicon.png">
@@ -68,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-关于xcode9编译出现Static-assert错误" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-iOS-监听系统键盘的出现和消失" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/09/26/关于xcode9编译出现Static-assert错误/" class="article-date">
-  <time datetime="2017-09-26T13:28:36.000Z" itemprop="datePublished">2017-09-26</time>
+    <a href="/2017/11/02/iOS-监听系统键盘的出现和消失/" class="article-date">
+  <time datetime="2017-11-02T11:01:04.000Z" itemprop="datePublished">2017-11-02</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于xcode9编译出现Static_assert错误
+      iOS监听系统键盘的出现和消失
     </h1>
   
 
@@ -94,14 +92,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>xcode9 编译时 CocoaLumberjack 出现Static_assert failed “format argument must be a string constant ， 代码行 os_log_error(OS_LOG_DEFAULT, “%{public}s”, msg); </p>
-<p><img src="http://oww32kb64.bkt.clouddn.com/image/21_576147_9362d0937fd8b14.png" alt="截图"></p>
-<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># pod update CocoaLumberjack</span></div></pre></td></tr></table></figure>
+        <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//注册键盘出现的通知</span></div><div class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span></div><div class="line">                                         selector:<span class="keyword">@selector</span>(keyboardWillShown:)</div><div class="line">                                             name:<span class="built_in">UIKeyboardWillShowNotification</span> </div><div class="line">                                           object:<span class="literal">nil</span>];</div><div class="line"></div><div class="line"><span class="comment">//注册键盘消失的通知</span></div><div class="line">[[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span></div><div class="line">                                         selector:<span class="keyword">@selector</span>(keyboardWillBeHidden:)</div><div class="line">                                             name:<span class="built_in">UIKeyboardWillHideNotification</span> </div><div class="line">                                           object:<span class="literal">nil</span>];</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)keyboardWillShow:(<span class="built_in">NSNotification</span> *)notify &#123;</div><div class="line">    <span class="comment">//键盘高度</span></div><div class="line">    <span class="built_in">CGRect</span> keyBoardFrame = [[[notify userInfo] objectForKey:<span class="built_in">UIKeyboardFrameEndUserInfoKey</span>] <span class="built_in">CGRectValue</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)keyboardWillBeHidden:(<span class="built_in">NSNotification</span> *)noti &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/" data-id="cj9id8le2000ay6p58yvf5edd" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/11/02/iOS-监听系统键盘的出现和消失/" data-id="cj9id8ldr0004y6p55pb8y8t6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -110,19 +106,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/09/26/iOS-UIButton文字居左显示/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          iOS-UIButton文字居左显示
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/23/Linux后台进程管理利器：supervisor/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/09/28/iOS-block的基础用法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Linux后台进程管理利器：supervisor</div>
+      <div class="article-nav-title">iOS-block的基础用法</div>
     </a>
   
 </nav>
