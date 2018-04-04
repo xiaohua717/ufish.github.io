@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java API 操作Hadoop系统 | 捕鱼的蜘蛛侠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java API 操作Hadoop系统">
+<meta property="og:url" content="http://u-fish.cn/2018/04/04/Java-API-操作Hadoop系统/index.html">
+<meta property="og:site_name" content="捕鱼的蜘蛛侠">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-04T02:52:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java API 操作Hadoop系统">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">捕鱼的蜘蛛侠</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">和平年代，跨界就业</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/categories/移动端">移动端</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://u-fish.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java-API-操作Hadoop系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/04/Java-API-操作Hadoop系统/" class="article-date">
+  <time datetime="2018-04-04T02:51:59.000Z" itemprop="datePublished">2018-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大数据/">大数据</a>►<a class="article-category-link" href="/categories/大数据/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java API 操作Hadoop系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.imooc.hadoop.hdfs;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.*;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.IOUtils;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.util.Progressable;</div><div class="line"><span class="keyword">import</span> org.junit.After;</div><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.BufferedInputStream;</div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileInputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.net.URI;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HDFSApp</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String HDFS_PATH = <span class="string">"hdfs://域名或ip地址:8020"</span>;</div><div class="line">    FileSystem fileSystem = <span class="keyword">null</span>;</div><div class="line">    Configuration configuration = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 创建HDFS目录</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mkdir</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        fileSystem.mkdirs(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 创建文件</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createFile</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        FSDataOutputStream outputStream = fileSystem.create(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/abcaa.txt"</span>));</div><div class="line">        outputStream.write(<span class="string">"hadoop dkjjkfdfjkdf 12132132 122dfdf dfd"</span>.getBytes());</div><div class="line">        outputStream.flush();</div><div class="line">        outputStream.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 打开一个文件</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        FSDataInputStream inputStream = fileSystem.open(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/abcaa.txt"</span>));</div><div class="line">        IOUtils.copyBytes(inputStream, System.out, <span class="number">1024</span>);</div><div class="line">        inputStream.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 重命名</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rename</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        fileSystem.rename(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/abcaa.txt"</span>), <span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/abc123.txt"</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 从本地拷贝一份到hdfs</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">copyFromLocalFile</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//无进度</span></div><div class="line">        <span class="comment">//fileSystem.copyFromLocalFile(new Path("E:\\xiaohua\\settings.jar"), new Path("/hdfsapi/test/"));</span></div><div class="line">        <span class="comment">// 有进度 E:\\xiaohua\\jdk-8u151-linux-x64.tar.gz</span></div><div class="line">        InputStream inputStream = <span class="keyword">new</span> BufferedInputStream(</div><div class="line">                <span class="keyword">new</span> FileInputStream(</div><div class="line">                        <span class="keyword">new</span> File(<span class="string">"E:\\xiaohua\\settings.jar"</span>)));</div><div class="line">        FSDataOutputStream outputStream = fileSystem.create(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/settings.jar"</span>), <span class="keyword">new</span> Progressable() &#123;</div><div class="line">            <span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">progress</span><span class="params">()</span> </span>&#123;</div><div class="line">                System.out.println(i++ + <span class="string">""</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        IOUtils.copyBytes(inputStream, outputStream, <span class="number">4096</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 从hdfs拷贝一份到本地</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">copyToLocalFile</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">// window上执行该语句会报NullPointException，可在mac或linux上测试一下</span></div><div class="line">        <span class="comment">// fileSystem.copyToLocalFile(new Path("/hdfsapi/test/settings.jar"), new Path("F:\\a.jar"));</span></div><div class="line">        fileSystem.copyToLocalFile(<span class="keyword">false</span>, <span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/settings.jar"</span>), <span class="keyword">new</span> Path(<span class="string">"F:\\a.jar"</span>), <span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 罗列文件</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listFiles</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        FileStatus [] fileStatuses = fileSystem.listStatus(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test"</span>));</div><div class="line">        <span class="keyword">for</span> (FileStatus file:fileStatuses) &#123;</div><div class="line">            <span class="keyword">short</span> replication = file.getReplication();</div><div class="line">            <span class="keyword">long</span> len = file.getLen();</div><div class="line">            System.out.println(file.isDirectory()?<span class="string">"目录"</span>:<span class="string">"文件\t"</span> + replication + <span class="string">"\t"</span> + len + <span class="string">"\t"</span> + file.getPath());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 删除文件</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        fileSystem.delete(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 测试用例开始前申请资源</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        configuration = <span class="keyword">new</span> Configuration();</div><div class="line">        fileSystem = FileSystem.get(<span class="keyword">new</span> URI(HDFS_PATH), configuration, <span class="string">"root"</span>);</div><div class="line">        System.out.println(<span class="string">"HDFSApp.setUp"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 测试用例完成后释放资源</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@After</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tearDown</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        configuration = <span class="keyword">null</span>;</div><div class="line">        fileSystem = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"HDFSApp.tearDown"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2018/04/04/Java-API-操作Hadoop系统/" data-id="cjfkhzh7t0001gkp585wrw9mq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/04/使用MapReduce开发WordCount应用程序/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          使用MapReduce开发WordCount应用程序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/04/Hadoop-shell常用操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hadoop shell常用操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/Hadoop/">Hadoop</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">6</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/04/使用MapReduce开发WordCount应用程序/">使用MapReduce开发WordCount应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/Java-API-操作Hadoop系统/">Java API 操作Hadoop系统</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/Hadoop-shell常用操作/">Hadoop shell常用操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/搭建单节点伪分布式Hadoop系统/">Hadoop伪分布式系统单机版环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/02/iOS-监听系统键盘的出现和消失/">iOS监听系统键盘的出现和消失</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xiaohua<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/categories/移动端" class="mobile-nav-link">移动端</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

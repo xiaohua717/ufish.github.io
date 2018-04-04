@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hadoop伪分布式系统单机版环境搭建 | 捕鱼的蜘蛛侠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本要素 操作系统：CentOS 7.0 编程语言：jdk-8u151-linux-x64.tar.gz Hadoop：hadoop-2.6.0-cdh5.7.0  jdk安装123$ tar -zxvf jdk-8u151-linux-x64.tar.gz -C /usr/local# 修改系统环境变量 $ vim /etc/profile 追加以下内容到 /etc/profile123JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop伪分布式系统单机版环境搭建">
+<meta property="og:url" content="http://u-fish.cn/2018/04/02/搭建单节点伪分布式Hadoop系统/index.html">
+<meta property="og:site_name" content="捕鱼的蜘蛛侠">
+<meta property="og:description" content="基本要素 操作系统：CentOS 7.0 编程语言：jdk-8u151-linux-x64.tar.gz Hadoop：hadoop-2.6.0-cdh5.7.0  jdk安装123$ tar -zxvf jdk-8u151-linux-x64.tar.gz -C /usr/local# 修改系统环境变量 $ vim /etc/profile 追加以下内容到 /etc/profile123JAVA">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-04T02:49:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop伪分布式系统单机版环境搭建">
+<meta name="twitter:description" content="基本要素 操作系统：CentOS 7.0 编程语言：jdk-8u151-linux-x64.tar.gz Hadoop：hadoop-2.6.0-cdh5.7.0  jdk安装123$ tar -zxvf jdk-8u151-linux-x64.tar.gz -C /usr/local# 修改系统环境变量 $ vim /etc/profile 追加以下内容到 /etc/profile123JAVA">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">捕鱼的蜘蛛侠</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">和平年代，跨界就业</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/categories/移动端">移动端</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://u-fish.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-搭建单节点伪分布式Hadoop系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/02/搭建单节点伪分布式Hadoop系统/" class="article-date">
+  <time datetime="2018-04-02T14:44:55.000Z" itemprop="datePublished">2018-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大数据/">大数据</a>►<a class="article-category-link" href="/categories/大数据/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hadoop伪分布式系统单机版环境搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本要素"><a href="#基本要素" class="headerlink" title="基本要素"></a>基本要素</h3><ul>
+<li>操作系统：<a href="https://www.centos.org/download/" target="_blank" rel="external">CentOS 7.0</a></li>
+<li>编程语言：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">jdk-8u151-linux-x64.tar.gz</a></li>
+<li>Hadoop：<a href="http://archive.cloudera.com/cdh5/cdh/5/" target="_blank" rel="external">hadoop-2.6.0-cdh5.7.0</a></li>
+</ul>
+<h3 id="jdk安装"><a href="#jdk安装" class="headerlink" title="jdk安装"></a>jdk安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ tar -zxvf jdk-8u151-linux-x64.tar.gz -C /usr/<span class="built_in">local</span></div><div class="line"><span class="comment"># 修改系统环境变量 </span></div><div class="line">$ vim /etc/profile</div></pre></td></tr></table></figure>
+<p>追加以下内容到 <code>/etc/profile</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME=/usr/local/jdk1.8.0_151</div><div class="line">PATH=$JAVA_HOME/bin:$PATH</div><div class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 使得环境变量生效 </span></div><div class="line">$ <span class="built_in">source</span> /etc/profile</div><div class="line"><span class="comment"># 验证java是否配置成功</span></div><div class="line">$ java -v</div></pre></td></tr></table></figure>
+<h3 id="安装ssh"><a href="#安装ssh" class="headerlink" title="安装ssh"></a>安装ssh</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo yum install ssh</div><div class="line">ssh-keygen -t rsa</div><div class="line">cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<h3 id="下载并解压hadoop"><a href="#下载并解压hadoop" class="headerlink" title="下载并解压hadoop"></a>下载并解压hadoop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf hadoop-2.6.0-cdh5.7.0.tar.gz -C /usr/<span class="built_in">local</span></div></pre></td></tr></table></figure>
+<h3 id="hadoop配置文件的修改-usr-local-hadoop-2-6-0-cdh5-7-0-etc-hadoop"><a href="#hadoop配置文件的修改-usr-local-hadoop-2-6-0-cdh5-7-0-etc-hadoop" class="headerlink" title="hadoop配置文件的修改(/usr/local/hadoop-2.6.0-cdh5.7.0/etc/hadoop)"></a>hadoop配置文件的修改(/usr/local/hadoop-2.6.0-cdh5.7.0/etc/hadoop)</h3><ol>
+<li>修改文件<code>hadoop-env.sh</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk1.8.0_151</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.修改文件<code>core-site.xml</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://当前服务器ip:8020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/app/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>3.修改文件<code>hdfs-site.xml</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>4.修改文<code>slaves</code></p>
+<p>正常的分布式才会使用到</p>
+<h3 id="启动hdfs"><a href="#启动hdfs" class="headerlink" title="启动hdfs"></a>启动hdfs</h3><p>格式化文件系统（仅第一次执行即可，不要重复执行）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hdfs/hadoop namenode -format</div></pre></td></tr></table></figure></p>
+<p>启动hdfs<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sbin/start-dfs.sh</div></pre></td></tr></table></figure></p>
+<p>验证是否启动成功：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ jps</div><div class="line">DataNode</div><div class="line">SecondaryNameNode</div><div class="line">NameNode</div></pre></td></tr></table></figure></p>
+<p>浏览器访问方式： <a href="http://当前服务器ip:50070" target="_blank" rel="external">http://当前服务器ip:50070</a></p>
+<p>停止hdfs<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sbin/stop-dfs.sh</div></pre></td></tr></table></figure></p>
+<h3 id="YARN环境搭建"><a href="#YARN环境搭建" class="headerlink" title="YARN环境搭建"></a>YARN环境搭建</h3><ol>
+<li>修改文件<code>mapred-site.xml</code><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.修改文件<code>yarn-site.xml</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>3.启动YARN相关的进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sbin/start-yarn.sh</div></pre></td></tr></table></figure></p>
+<p>4.验证<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ jps</div><div class="line">ResourceManager</div><div class="line">NodeManager</div></pre></td></tr></table></figure></p>
+<p>浏览器访问 <a href="http://当前服务器ip:8088" target="_blank" rel="external">http://当前服务器ip:8088</a></p>
+<p>5.停止YARN相关的进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sbin/stop-yarn.sh</div></pre></td></tr></table></figure></p>
+<p>6.例子测试<br>提交mr作业到YARN上运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># jar包资源位于/home/hadoop/app/hadoop-2.6.0-cdh5.7.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0-cdh5.7.0.jar</span></div><div class="line"></div><div class="line">$ hadoop jar hadoop-mapreduce-examples-2.6.0-cdh5.7.0.jar pi 2 3</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2018/04/02/搭建单节点伪分布式Hadoop系统/" data-id="cjfkhzh8e000egkp5qd9dntdr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/04/Hadoop-shell常用操作/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hadoop shell常用操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/02/iOS-监听系统键盘的出现和消失/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">iOS监听系统键盘的出现和消失</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/Hadoop/">Hadoop</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">6</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/04/使用MapReduce开发WordCount应用程序/">使用MapReduce开发WordCount应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/Java-API-操作Hadoop系统/">Java API 操作Hadoop系统</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/Hadoop-shell常用操作/">Hadoop shell常用操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/搭建单节点伪分布式Hadoop系统/">Hadoop伪分布式系统单机版环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/02/iOS-监听系统键盘的出现和消失/">iOS监听系统键盘的出现和消失</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xiaohua<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/categories/移动端" class="mobile-nav-link">移动端</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

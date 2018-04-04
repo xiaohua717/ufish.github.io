@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hadoop shell常用操作 | 捕鱼的蜘蛛侠</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="查看指定目录1$ hadoop fs -ls / 递归查看指定目录1$ hadoop fs -ls -R / 上传文件到文件系统12$ hadoop fs -put hello.txt /hadoop fs -copyFromLocal hello.txt /text/a/b/h.txt 查看指定文件内容12$ hadoop fs -cat /hello.txthadoop fs -text /h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop shell常用操作">
+<meta property="og:url" content="http://u-fish.cn/2018/04/04/Hadoop-shell常用操作/index.html">
+<meta property="og:site_name" content="捕鱼的蜘蛛侠">
+<meta property="og:description" content="查看指定目录1$ hadoop fs -ls / 递归查看指定目录1$ hadoop fs -ls -R / 上传文件到文件系统12$ hadoop fs -put hello.txt /hadoop fs -copyFromLocal hello.txt /text/a/b/h.txt 查看指定文件内容12$ hadoop fs -cat /hello.txthadoop fs -text /h">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-04T02:51:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop shell常用操作">
+<meta name="twitter:description" content="查看指定目录1$ hadoop fs -ls / 递归查看指定目录1$ hadoop fs -ls -R / 上传文件到文件系统12$ hadoop fs -put hello.txt /hadoop fs -copyFromLocal hello.txt /text/a/b/h.txt 查看指定文件内容12$ hadoop fs -cat /hello.txthadoop fs -text /h">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">捕鱼的蜘蛛侠</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">和平年代，跨界就业</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/categories/移动端">移动端</a>
+        
+          <a class="main-nav-link" href="/categories/Linux">Linux</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://u-fish.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Hadoop-shell常用操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/04/Hadoop-shell常用操作/" class="article-date">
+  <time datetime="2018-04-04T02:51:14.000Z" itemprop="datePublished">2018-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大数据/">大数据</a>►<a class="article-category-link" href="/categories/大数据/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hadoop shell常用操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="查看指定目录"><a href="#查看指定目录" class="headerlink" title="查看指定目录"></a>查看指定目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -ls /</div></pre></td></tr></table></figure>
+<h5 id="递归查看指定目录"><a href="#递归查看指定目录" class="headerlink" title="递归查看指定目录"></a>递归查看指定目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -ls -R /</div></pre></td></tr></table></figure>
+<h5 id="上传文件到文件系统"><a href="#上传文件到文件系统" class="headerlink" title="上传文件到文件系统"></a>上传文件到文件系统</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -put hello.txt /</div><div class="line">hadoop fs -copyFromLocal hello.txt /text/a/b/h.txt</div></pre></td></tr></table></figure>
+<h5 id="查看指定文件内容"><a href="#查看指定文件内容" class="headerlink" title="查看指定文件内容"></a>查看指定文件内容</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -cat /hello.txt</div><div class="line">hadoop fs -text /hello.txt</div></pre></td></tr></table></figure>
+<h5 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -mkdir /<span class="built_in">test</span></div></pre></td></tr></table></figure>
+<h5 id="递归创建目录"><a href="#递归创建目录" class="headerlink" title="递归创建目录"></a>递归创建目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -mkdir -p /text/a/b</div></pre></td></tr></table></figure>
+<h5 id="从文件系统获取文件到本地"><a href="#从文件系统获取文件到本地" class="headerlink" title="从文件系统获取文件到本地"></a>从文件系统获取文件到本地</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -get /text/a/b/h.txt</div></pre></td></tr></table></figure>
+<h5 id="更多详细命令如下："><a href="#更多详细命令如下：" class="headerlink" title="更多详细命令如下："></a>更多详细命令如下：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs</div><div class="line">Usage: hadoop fs [generic options]</div><div class="line">        [-appendToFile &lt;localsrc&gt; ... &lt;dst&gt;]</div><div class="line">        [-cat [-ignoreCrc] &lt;src&gt; ...]</div><div class="line">        [-checksum &lt;src&gt; ...]</div><div class="line">        [-chgrp [-R] GROUP PATH...]</div><div class="line">        [-chmod [-R] &lt;MODE[,MODE]... | OCTALMODE&gt; PATH...]</div><div class="line">        [-chown [-R] [OWNER][:[GROUP]] PATH...]</div><div class="line">        [-copyFromLocal [-f] [-p] [-l] &lt;localsrc&gt; ... &lt;dst&gt;]</div><div class="line">        [-copyToLocal [-p] [-ignoreCrc] [-crc] &lt;src&gt; ... &lt;localdst&gt;]</div><div class="line">        [-count [-q] [-h] [-v] &lt;path&gt; ...]</div><div class="line">        [-cp [-f] [-p | -p[topax]] &lt;src&gt; ... &lt;dst&gt;]</div><div class="line">        [-createSnapshot &lt;snapshotDir&gt; [&lt;snapshotName&gt;]]</div><div class="line">        [-deleteSnapshot &lt;snapshotDir&gt; &lt;snapshotName&gt;]</div><div class="line">        [-df [-h] [&lt;path&gt; ...]]</div><div class="line">        [-du [-s] [-h] &lt;path&gt; ...]</div><div class="line">        [-expunge]</div><div class="line">        [-find &lt;path&gt; ... &lt;expression&gt; ...]</div><div class="line">        [-get [-p] [-ignoreCrc] [-crc] &lt;src&gt; ... &lt;localdst&gt;]</div><div class="line">        [-getfacl [-R] &lt;path&gt;]</div><div class="line">        [-getfattr [-R] &#123;-n name | -d&#125; [-e en] &lt;path&gt;]</div><div class="line">        [-getmerge [-nl] &lt;src&gt; &lt;localdst&gt;]</div><div class="line">        [-<span class="built_in">help</span> [cmd ...]]</div><div class="line">        [-ls [-d] [-h] [-R] [&lt;path&gt; ...]]</div><div class="line">        [-mkdir [-p] &lt;path&gt; ...]</div><div class="line">        [-moveFromLocal &lt;localsrc&gt; ... &lt;dst&gt;]</div><div class="line">        [-moveToLocal &lt;src&gt; &lt;localdst&gt;]</div><div class="line">        [-mv &lt;src&gt; ... &lt;dst&gt;]</div><div class="line">        [-put [-f] [-p] [-l] &lt;localsrc&gt; ... &lt;dst&gt;]</div><div class="line">        [-renameSnapshot &lt;snapshotDir&gt; &lt;oldName&gt; &lt;newName&gt;]</div><div class="line">        [-rm [-f] [-r|-R] [-skipTrash] &lt;src&gt; ...]</div><div class="line">        [-rmdir [--ignore-fail-on-non-empty] &lt;dir&gt; ...]</div><div class="line">        [-setfacl [-R] [&#123;-b|-k&#125; &#123;-m|-x &lt;acl_spec&gt;&#125; &lt;path&gt;]|[--<span class="built_in">set</span> &lt;acl_spec&gt; &lt;path&gt;]]</div><div class="line">        [-setfattr &#123;-n name [-v value] | -x name&#125; &lt;path&gt;]</div><div class="line">        [-setrep [-R] [-w] &lt;rep&gt; &lt;path&gt; ...]</div><div class="line">        [-<span class="built_in">stat</span> [format] &lt;path&gt; ...]</div><div class="line">        [-tail [-f] &lt;file&gt;]</div><div class="line">        [-<span class="built_in">test</span> -[defsz] &lt;path&gt;]</div><div class="line">        [-text [-ignoreCrc] &lt;src&gt; ...]</div><div class="line">        [-touchz &lt;path&gt; ...]</div><div class="line">        [-usage [cmd ...]]</div><div class="line"></div><div class="line">Generic options supported are</div><div class="line">-conf &lt;configuration file&gt;     specify an application configuration file</div><div class="line">-D &lt;property=value&gt;            use value <span class="keyword">for</span> given property</div><div class="line">-fs &lt;<span class="built_in">local</span>|namenode:port&gt;      specify a namenode</div><div class="line">-jt &lt;<span class="built_in">local</span>|resourcemanager:port&gt;    specify a ResourceManager</div><div class="line">-files &lt;comma separated list of files&gt;    specify comma separated files to be copied to the map reduce cluster</div><div class="line">-libjars &lt;comma separated list of jars&gt;    specify comma separated jar files to include <span class="keyword">in</span> the classpath.</div><div class="line">-archives &lt;comma separated list of archives&gt;    specify comma separated archives to be unarchived on the compute machines.</div><div class="line"></div><div class="line">The general <span class="built_in">command</span> line syntax is</div><div class="line">bin/hadoop <span class="built_in">command</span> [genericOptions] [commandOptions]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2018/04/04/Hadoop-shell常用操作/" data-id="cjfkhzh7p0000gkp5k3uk5y4z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/04/Java-API-操作Hadoop系统/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java API 操作Hadoop系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/02/搭建单节点伪分布式Hadoop系统/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hadoop伪分布式系统单机版环境搭建</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/Hadoop/">Hadoop</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">6</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/04/使用MapReduce开发WordCount应用程序/">使用MapReduce开发WordCount应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/Java-API-操作Hadoop系统/">Java API 操作Hadoop系统</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/Hadoop-shell常用操作/">Hadoop shell常用操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/搭建单节点伪分布式Hadoop系统/">Hadoop伪分布式系统单机版环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/02/iOS-监听系统键盘的出现和消失/">iOS监听系统键盘的出现和消失</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Xiaohua<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/categories/移动端" class="mobile-nav-link">移动端</a>
+  
+    <a href="/categories/Linux" class="mobile-nav-link">Linux</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

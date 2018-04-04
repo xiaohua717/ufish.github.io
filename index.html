@@ -67,6 +67,209 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-使用MapReduce开发WordCount应用程序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/04/使用MapReduce开发WordCount应用程序/" class="article-date">
+  <time datetime="2018-04-04T02:52:33.000Z" itemprop="datePublished">2018-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大数据/">大数据</a>►<a class="article-category-link" href="/categories/大数据/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/04/使用MapReduce开发WordCount应用程序/">使用MapReduce开发WordCount应用程序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.imooc.hadoop.mapreduce;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileSystem;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.LongWritable;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Job;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Mapper;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Partitioner;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Reducer;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 使用MapReduce开发WordCount应用程序</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PartitionerApp</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * Map：读取输入的文件</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">LongWritable</span>, <span class="title">Text</span>, <span class="title">Text</span>, <span class="title">LongWritable</span>&gt; </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">(Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">            <span class="keyword">super</span>.setup(context);</div><div class="line">            System.out.println(<span class="string">"setup"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">cleanup</span><span class="params">(Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">            <span class="keyword">super</span>.cleanup(context);</div><div class="line">            System.out.println(<span class="string">"cleanup"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">map</span><span class="params">(LongWritable key, Text value, Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">            String line = value.toString();</div><div class="line">            String[] words = line.split(<span class="string">" "</span>);</div><div class="line">            context.write(<span class="keyword">new</span> Text(words[<span class="number">0</span>]), <span class="keyword">new</span> LongWritable(Long.parseLong(words[<span class="number">1</span>])));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * Reduce:归并操作</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyReducer</span> <span class="keyword">extends</span> <span class="title">Reducer</span>&lt;<span class="title">Text</span>, <span class="title">LongWritable</span>, <span class="title">Text</span>, <span class="title">LongWritable</span>&gt; </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">(Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">            <span class="keyword">super</span>.setup(context);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">cleanup</span><span class="params">(Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">            <span class="keyword">super</span>.cleanup(context);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">reduce</span><span class="params">(Text key, Iterable&lt;LongWritable&gt; values, Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">            <span class="keyword">long</span> sum = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (LongWritable value : values) &#123;</div><div class="line">                sum += value.get();</div><div class="line">            &#125;</div><div class="line">            context.write(key, <span class="keyword">new</span> LongWritable(sum));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyPartitioner</span> <span class="keyword">extends</span> <span class="title">Partitioner</span>&lt;<span class="title">Text</span>, <span class="title">LongWritable</span>&gt; </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPartition</span><span class="params">(Text key, LongWritable value, <span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (key.toString().equals(<span class="string">"xiaomi"</span>))</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">            <span class="keyword">if</span> (key.toString().equals(<span class="string">"huawei"</span>))</div><div class="line">                <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (key.toString().equals(<span class="string">"iphone7"</span>))</div><div class="line">                <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     *  1、打包命令：mvn clean package -DskipTests</span></div><div class="line"><span class="comment">     *  2、上传到服务器</span></div><div class="line"><span class="comment">     *  3、执行 hadoop jar jar包名称 包名.主类名 输入文件路径 输出文件路径</span></div><div class="line"><span class="comment">     *  Example：</span></div><div class="line"><span class="comment">     *  hadoop jar hadoop-train-1.0.jar com.imooc.hadoop.mapreduce.WordCountApp hdfs://jd001:8020/hello.txt hdfs://jd001:8020/opHello.txt</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> strings</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     * 相同的代码和脚本再次执行，会报错</span></div><div class="line"><span class="comment">     *  security.UserGroupInformation: PriviledgedActionException as:root (auth:SIMPLE)</span></div><div class="line"><span class="comment">     *  cause:org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory hdfs://jd001:8020/opHello.txt already exists</span></div><div class="line"><span class="comment">     *  在MR中，输出文件是不能事先存在的，所以有两种处理方式</span></div><div class="line"><span class="comment">     *  1）执行命令前，先手工通过shell的方式将输出文件夹删除</span></div><div class="line"><span class="comment">     *  hadoop fs -rm -r /output/opHello.txt</span></div><div class="line"><span class="comment">     *  2）在代码中完成自动删除功能</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] strings)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Configuration configuration = <span class="keyword">new</span> Configuration();</div><div class="line"></div><div class="line">        <span class="comment">//准备清理已存在的输出目录</span></div><div class="line">        Path outputPath = <span class="keyword">new</span> Path(strings[<span class="number">1</span>]);</div><div class="line">        FileSystem fileSystem = FileSystem.get(configuration);</div><div class="line">        <span class="keyword">if</span> (fileSystem.exists(outputPath))&#123;</div><div class="line">            fileSystem.delete(outputPath, <span class="keyword">true</span>);</div><div class="line">            System.out.println(<span class="string">"output file exists, but it has delete"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">// 创建Job</span></div><div class="line">        Job job = Job.getInstance(configuration, <span class="string">"wordcount"</span>);</div><div class="line">        <span class="comment">//设置Job的处理类</span></div><div class="line">        job.setJarByClass(PartitionerApp.class);</div><div class="line">        <span class="comment">// 设置作业处理的输入路径</span></div><div class="line">        FileInputFormat.setInputPaths(job, <span class="keyword">new</span> Path(strings[<span class="number">0</span>]));</div><div class="line"></div><div class="line">        <span class="comment">// 设置map相关参数</span></div><div class="line">        job.setMapperClass(MyMapper.class);</div><div class="line">        job.setMapOutputKeyClass(Text.class);</div><div class="line">        job.setMapOutputValueClass(LongWritable.class);</div><div class="line"></div><div class="line">        <span class="comment">// 设置job的partition</span></div><div class="line">        job.setPartitionerClass(MyPartitioner.class);</div><div class="line">        <span class="comment">// 设置4个reducer，每个分区一个</span></div><div class="line">        job.setNumReduceTasks(<span class="number">4</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 设置reduce相关参数</span></div><div class="line">        job.setReducerClass(MyReducer.class);</div><div class="line">        job.setOutputKeyClass(Text.class);</div><div class="line">        job.setOutputValueClass(LongWritable.class);</div><div class="line"></div><div class="line">        <span class="comment">// 设置作业处理的输出路径</span></div><div class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> Path(strings[<span class="number">1</span>]));</div><div class="line"></div><div class="line">        System.exit(job.waitForCompletion(<span class="keyword">true</span>) ? <span class="number">0</span> : <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2018/04/04/使用MapReduce开发WordCount应用程序/" data-id="cjfkhzh8c000dgkp5wjxbwsw1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java-API-操作Hadoop系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/04/Java-API-操作Hadoop系统/" class="article-date">
+  <time datetime="2018-04-04T02:51:59.000Z" itemprop="datePublished">2018-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大数据/">大数据</a>►<a class="article-category-link" href="/categories/大数据/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/04/Java-API-操作Hadoop系统/">Java API 操作Hadoop系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.imooc.hadoop.hdfs;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.*;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.IOUtils;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.util.Progressable;</div><div class="line"><span class="keyword">import</span> org.junit.After;</div><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.BufferedInputStream;</div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileInputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.net.URI;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HDFSApp</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String HDFS_PATH = <span class="string">"hdfs://域名或ip地址:8020"</span>;</div><div class="line">    FileSystem fileSystem = <span class="keyword">null</span>;</div><div class="line">    Configuration configuration = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 创建HDFS目录</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mkdir</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        fileSystem.mkdirs(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 创建文件</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createFile</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        FSDataOutputStream outputStream = fileSystem.create(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/abcaa.txt"</span>));</div><div class="line">        outputStream.write(<span class="string">"hadoop dkjjkfdfjkdf 12132132 122dfdf dfd"</span>.getBytes());</div><div class="line">        outputStream.flush();</div><div class="line">        outputStream.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 打开一个文件</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        FSDataInputStream inputStream = fileSystem.open(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/abcaa.txt"</span>));</div><div class="line">        IOUtils.copyBytes(inputStream, System.out, <span class="number">1024</span>);</div><div class="line">        inputStream.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 重命名</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rename</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        fileSystem.rename(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/abcaa.txt"</span>), <span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/abc123.txt"</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 从本地拷贝一份到hdfs</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">copyFromLocalFile</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//无进度</span></div><div class="line">        <span class="comment">//fileSystem.copyFromLocalFile(new Path("E:\\xiaohua\\settings.jar"), new Path("/hdfsapi/test/"));</span></div><div class="line">        <span class="comment">// 有进度 E:\\xiaohua\\jdk-8u151-linux-x64.tar.gz</span></div><div class="line">        InputStream inputStream = <span class="keyword">new</span> BufferedInputStream(</div><div class="line">                <span class="keyword">new</span> FileInputStream(</div><div class="line">                        <span class="keyword">new</span> File(<span class="string">"E:\\xiaohua\\settings.jar"</span>)));</div><div class="line">        FSDataOutputStream outputStream = fileSystem.create(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/settings.jar"</span>), <span class="keyword">new</span> Progressable() &#123;</div><div class="line">            <span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">progress</span><span class="params">()</span> </span>&#123;</div><div class="line">                System.out.println(i++ + <span class="string">""</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        IOUtils.copyBytes(inputStream, outputStream, <span class="number">4096</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 从hdfs拷贝一份到本地</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">copyToLocalFile</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">// window上执行该语句会报NullPointException，可在mac或linux上测试一下</span></div><div class="line">        <span class="comment">// fileSystem.copyToLocalFile(new Path("/hdfsapi/test/settings.jar"), new Path("F:\\a.jar"));</span></div><div class="line">        fileSystem.copyToLocalFile(<span class="keyword">false</span>, <span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test/settings.jar"</span>), <span class="keyword">new</span> Path(<span class="string">"F:\\a.jar"</span>), <span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 罗列文件</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listFiles</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        FileStatus [] fileStatuses = fileSystem.listStatus(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi/test"</span>));</div><div class="line">        <span class="keyword">for</span> (FileStatus file:fileStatuses) &#123;</div><div class="line">            <span class="keyword">short</span> replication = file.getReplication();</div><div class="line">            <span class="keyword">long</span> len = file.getLen();</div><div class="line">            System.out.println(file.isDirectory()?<span class="string">"目录"</span>:<span class="string">"文件\t"</span> + replication + <span class="string">"\t"</span> + len + <span class="string">"\t"</span> + file.getPath());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 删除文件</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        fileSystem.delete(<span class="keyword">new</span> Path(<span class="string">"/hdfsapi"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 测试用例开始前申请资源</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        configuration = <span class="keyword">new</span> Configuration();</div><div class="line">        fileSystem = FileSystem.get(<span class="keyword">new</span> URI(HDFS_PATH), configuration, <span class="string">"root"</span>);</div><div class="line">        System.out.println(<span class="string">"HDFSApp.setUp"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * 测试用例完成后释放资源</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@After</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tearDown</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        configuration = <span class="keyword">null</span>;</div><div class="line">        fileSystem = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"HDFSApp.tearDown"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2018/04/04/Java-API-操作Hadoop系统/" data-id="cjfkhzh7t0001gkp585wrw9mq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Hadoop-shell常用操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/04/Hadoop-shell常用操作/" class="article-date">
+  <time datetime="2018-04-04T02:51:14.000Z" itemprop="datePublished">2018-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大数据/">大数据</a>►<a class="article-category-link" href="/categories/大数据/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/04/Hadoop-shell常用操作/">Hadoop shell常用操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="查看指定目录"><a href="#查看指定目录" class="headerlink" title="查看指定目录"></a>查看指定目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -ls /</div></pre></td></tr></table></figure>
+<h5 id="递归查看指定目录"><a href="#递归查看指定目录" class="headerlink" title="递归查看指定目录"></a>递归查看指定目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -ls -R /</div></pre></td></tr></table></figure>
+<h5 id="上传文件到文件系统"><a href="#上传文件到文件系统" class="headerlink" title="上传文件到文件系统"></a>上传文件到文件系统</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -put hello.txt /</div><div class="line">hadoop fs -copyFromLocal hello.txt /text/a/b/h.txt</div></pre></td></tr></table></figure>
+<h5 id="查看指定文件内容"><a href="#查看指定文件内容" class="headerlink" title="查看指定文件内容"></a>查看指定文件内容</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -cat /hello.txt</div><div class="line">hadoop fs -text /hello.txt</div></pre></td></tr></table></figure>
+<h5 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -mkdir /<span class="built_in">test</span></div></pre></td></tr></table></figure>
+<h5 id="递归创建目录"><a href="#递归创建目录" class="headerlink" title="递归创建目录"></a>递归创建目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -mkdir -p /text/a/b</div></pre></td></tr></table></figure>
+<h5 id="从文件系统获取文件到本地"><a href="#从文件系统获取文件到本地" class="headerlink" title="从文件系统获取文件到本地"></a>从文件系统获取文件到本地</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs -get /text/a/b/h.txt</div></pre></td></tr></table></figure>
+<h5 id="更多详细命令如下："><a href="#更多详细命令如下：" class="headerlink" title="更多详细命令如下："></a>更多详细命令如下：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">$ hadoop fs</div><div class="line">Usage: hadoop fs [generic options]</div><div class="line">        [-appendToFile &lt;localsrc&gt; ... &lt;dst&gt;]</div><div class="line">        [-cat [-ignoreCrc] &lt;src&gt; ...]</div><div class="line">        [-checksum &lt;src&gt; ...]</div><div class="line">        [-chgrp [-R] GROUP PATH...]</div><div class="line">        [-chmod [-R] &lt;MODE[,MODE]... | OCTALMODE&gt; PATH...]</div><div class="line">        [-chown [-R] [OWNER][:[GROUP]] PATH...]</div><div class="line">        [-copyFromLocal [-f] [-p] [-l] &lt;localsrc&gt; ... &lt;dst&gt;]</div><div class="line">        [-copyToLocal [-p] [-ignoreCrc] [-crc] &lt;src&gt; ... &lt;localdst&gt;]</div><div class="line">        [-count [-q] [-h] [-v] &lt;path&gt; ...]</div><div class="line">        [-cp [-f] [-p | -p[topax]] &lt;src&gt; ... &lt;dst&gt;]</div><div class="line">        [-createSnapshot &lt;snapshotDir&gt; [&lt;snapshotName&gt;]]</div><div class="line">        [-deleteSnapshot &lt;snapshotDir&gt; &lt;snapshotName&gt;]</div><div class="line">        [-df [-h] [&lt;path&gt; ...]]</div><div class="line">        [-du [-s] [-h] &lt;path&gt; ...]</div><div class="line">        [-expunge]</div><div class="line">        [-find &lt;path&gt; ... &lt;expression&gt; ...]</div><div class="line">        [-get [-p] [-ignoreCrc] [-crc] &lt;src&gt; ... &lt;localdst&gt;]</div><div class="line">        [-getfacl [-R] &lt;path&gt;]</div><div class="line">        [-getfattr [-R] &#123;-n name | -d&#125; [-e en] &lt;path&gt;]</div><div class="line">        [-getmerge [-nl] &lt;src&gt; &lt;localdst&gt;]</div><div class="line">        [-<span class="built_in">help</span> [cmd ...]]</div><div class="line">        [-ls [-d] [-h] [-R] [&lt;path&gt; ...]]</div><div class="line">        [-mkdir [-p] &lt;path&gt; ...]</div><div class="line">        [-moveFromLocal &lt;localsrc&gt; ... &lt;dst&gt;]</div><div class="line">        [-moveToLocal &lt;src&gt; &lt;localdst&gt;]</div><div class="line">        [-mv &lt;src&gt; ... &lt;dst&gt;]</div><div class="line">        [-put [-f] [-p] [-l] &lt;localsrc&gt; ... &lt;dst&gt;]</div><div class="line">        [-renameSnapshot &lt;snapshotDir&gt; &lt;oldName&gt; &lt;newName&gt;]</div><div class="line">        [-rm [-f] [-r|-R] [-skipTrash] &lt;src&gt; ...]</div><div class="line">        [-rmdir [--ignore-fail-on-non-empty] &lt;dir&gt; ...]</div><div class="line">        [-setfacl [-R] [&#123;-b|-k&#125; &#123;-m|-x &lt;acl_spec&gt;&#125; &lt;path&gt;]|[--<span class="built_in">set</span> &lt;acl_spec&gt; &lt;path&gt;]]</div><div class="line">        [-setfattr &#123;-n name [-v value] | -x name&#125; &lt;path&gt;]</div><div class="line">        [-setrep [-R] [-w] &lt;rep&gt; &lt;path&gt; ...]</div><div class="line">        [-<span class="built_in">stat</span> [format] &lt;path&gt; ...]</div><div class="line">        [-tail [-f] &lt;file&gt;]</div><div class="line">        [-<span class="built_in">test</span> -[defsz] &lt;path&gt;]</div><div class="line">        [-text [-ignoreCrc] &lt;src&gt; ...]</div><div class="line">        [-touchz &lt;path&gt; ...]</div><div class="line">        [-usage [cmd ...]]</div><div class="line"></div><div class="line">Generic options supported are</div><div class="line">-conf &lt;configuration file&gt;     specify an application configuration file</div><div class="line">-D &lt;property=value&gt;            use value <span class="keyword">for</span> given property</div><div class="line">-fs &lt;<span class="built_in">local</span>|namenode:port&gt;      specify a namenode</div><div class="line">-jt &lt;<span class="built_in">local</span>|resourcemanager:port&gt;    specify a ResourceManager</div><div class="line">-files &lt;comma separated list of files&gt;    specify comma separated files to be copied to the map reduce cluster</div><div class="line">-libjars &lt;comma separated list of jars&gt;    specify comma separated jar files to include <span class="keyword">in</span> the classpath.</div><div class="line">-archives &lt;comma separated list of archives&gt;    specify comma separated archives to be unarchived on the compute machines.</div><div class="line"></div><div class="line">The general <span class="built_in">command</span> line syntax is</div><div class="line">bin/hadoop <span class="built_in">command</span> [genericOptions] [commandOptions]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2018/04/04/Hadoop-shell常用操作/" data-id="cjfkhzh7p0000gkp5k3uk5y4z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-搭建单节点伪分布式Hadoop系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/02/搭建单节点伪分布式Hadoop系统/" class="article-date">
+  <time datetime="2018-04-02T14:44:55.000Z" itemprop="datePublished">2018-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大数据/">大数据</a>►<a class="article-category-link" href="/categories/大数据/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/02/搭建单节点伪分布式Hadoop系统/">Hadoop伪分布式系统单机版环境搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本要素"><a href="#基本要素" class="headerlink" title="基本要素"></a>基本要素</h3><ul>
+<li>操作系统：<a href="https://www.centos.org/download/" target="_blank" rel="external">CentOS 7.0</a></li>
+<li>编程语言：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">jdk-8u151-linux-x64.tar.gz</a></li>
+<li>Hadoop：<a href="http://archive.cloudera.com/cdh5/cdh/5/" target="_blank" rel="external">hadoop-2.6.0-cdh5.7.0</a></li>
+</ul>
+<h3 id="jdk安装"><a href="#jdk安装" class="headerlink" title="jdk安装"></a>jdk安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ tar -zxvf jdk-8u151-linux-x64.tar.gz -C /usr/<span class="built_in">local</span></div><div class="line"><span class="comment"># 修改系统环境变量 </span></div><div class="line">$ vim /etc/profile</div></pre></td></tr></table></figure>
+<p>追加以下内容到 <code>/etc/profile</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME=/usr/local/jdk1.8.0_151</div><div class="line">PATH=$JAVA_HOME/bin:$PATH</div><div class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 使得环境变量生效 </span></div><div class="line">$ <span class="built_in">source</span> /etc/profile</div><div class="line"><span class="comment"># 验证java是否配置成功</span></div><div class="line">$ java -v</div></pre></td></tr></table></figure>
+<h3 id="安装ssh"><a href="#安装ssh" class="headerlink" title="安装ssh"></a>安装ssh</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo yum install ssh</div><div class="line">ssh-keygen -t rsa</div><div class="line">cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<h3 id="下载并解压hadoop"><a href="#下载并解压hadoop" class="headerlink" title="下载并解压hadoop"></a>下载并解压hadoop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf hadoop-2.6.0-cdh5.7.0.tar.gz -C /usr/<span class="built_in">local</span></div></pre></td></tr></table></figure>
+<h3 id="hadoop配置文件的修改-usr-local-hadoop-2-6-0-cdh5-7-0-etc-hadoop"><a href="#hadoop配置文件的修改-usr-local-hadoop-2-6-0-cdh5-7-0-etc-hadoop" class="headerlink" title="hadoop配置文件的修改(/usr/local/hadoop-2.6.0-cdh5.7.0/etc/hadoop)"></a>hadoop配置文件的修改(/usr/local/hadoop-2.6.0-cdh5.7.0/etc/hadoop)</h3><ol>
+<li>修改文件<code>hadoop-env.sh</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk1.8.0_151</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.修改文件<code>core-site.xml</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://当前服务器ip:8020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/app/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>3.修改文件<code>hdfs-site.xml</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>4.修改文<code>slaves</code></p>
+<p>正常的分布式才会使用到</p>
+<h3 id="启动hdfs"><a href="#启动hdfs" class="headerlink" title="启动hdfs"></a>启动hdfs</h3><p>格式化文件系统（仅第一次执行即可，不要重复执行）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hdfs/hadoop namenode -format</div></pre></td></tr></table></figure></p>
+<p>启动hdfs<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sbin/start-dfs.sh</div></pre></td></tr></table></figure></p>
+<p>验证是否启动成功：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ jps</div><div class="line">DataNode</div><div class="line">SecondaryNameNode</div><div class="line">NameNode</div></pre></td></tr></table></figure></p>
+<p>浏览器访问方式： <a href="http://当前服务器ip:50070" target="_blank" rel="external">http://当前服务器ip:50070</a></p>
+<p>停止hdfs<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sbin/stop-dfs.sh</div></pre></td></tr></table></figure></p>
+<h3 id="YARN环境搭建"><a href="#YARN环境搭建" class="headerlink" title="YARN环境搭建"></a>YARN环境搭建</h3><ol>
+<li>修改文件<code>mapred-site.xml</code><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.修改文件<code>yarn-site.xml</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>3.启动YARN相关的进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sbin/start-yarn.sh</div></pre></td></tr></table></figure></p>
+<p>4.验证<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ jps</div><div class="line">ResourceManager</div><div class="line">NodeManager</div></pre></td></tr></table></figure></p>
+<p>浏览器访问 <a href="http://当前服务器ip:8088" target="_blank" rel="external">http://当前服务器ip:8088</a></p>
+<p>5.停止YARN相关的进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sbin/stop-yarn.sh</div></pre></td></tr></table></figure></p>
+<p>6.例子测试<br>提交mr作业到YARN上运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># jar包资源位于/home/hadoop/app/hadoop-2.6.0-cdh5.7.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0-cdh5.7.0.jar</span></div><div class="line"></div><div class="line">$ hadoop jar hadoop-mapreduce-examples-2.6.0-cdh5.7.0.jar pi 2 3</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://u-fish.cn/2018/04/02/搭建单节点伪分布式Hadoop系统/" data-id="cjfkhzh8e000egkp5qd9dntdr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-iOS-监听系统键盘的出现和消失" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/02/iOS-监听系统键盘的出现和消失/" class="article-date">
@@ -98,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/11/02/iOS-监听系统键盘的出现和消失/" data-id="cj9id8ldr0004y6p55pb8y8t6" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/11/02/iOS-监听系统键盘的出现和消失/" data-id="cjfkhzh8b000bgkp5duwqmoyh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -146,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/28/iOS-block的基础用法/" data-id="cj9id8ldp0003y6p5q0fdktdz" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/28/iOS-block的基础用法/" data-id="cjfkhzh820005gkp5e64z8kqp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/" data-id="cj9id8ldx0008y6p5mpdgcx8y" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/" data-id="cjfkhzh89000agkp5w99ry3t0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +445,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/" data-id="cj9id8ldv0007y6p5w74pv15z" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/" data-id="cjfkhzh870008gkp5a8b33qef" class="article-share-link">Share</a>
       
       
     </footer>
@@ -285,7 +488,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/26/iOS-UIButton文字居左显示/" data-id="cj9id8ldk0001y6p5bapb9ger" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/26/iOS-UIButton文字居左显示/" data-id="cjfkhzh850007gkp53h7zvyjk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,113 +531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/" data-id="cj9id8le2000ay6p58yvf5edd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux后台进程管理利器：supervisor" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/23/Linux后台进程管理利器：supervisor/" class="article-date">
-  <time datetime="2017-09-23T09:52:12.000Z" itemprop="datePublished">2017-09-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/CentOS/">CentOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/23/Linux后台进程管理利器：supervisor/">Linux后台进程管理利器：supervisor</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>supervisor就是Python开发的一套通用的进程管理程序，能将一个普通的命令行进行变为后台daemon，并监控进程状态，异常退出时能自动启动。</p>
-<h3 id="二、如何安装"><a href="#二、如何安装" class="headerlink" title="二、如何安装"></a>二、如何安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># pip install supervisor</span></div></pre></td></tr></table></figure>
-<h3 id="三、配置"><a href="#三、配置" class="headerlink" title="三、配置"></a>三、配置</h3><p>运行<code>supervisord</code>服务的时候，需要指定supervisor的配置文件，如果没有显式指定，默认在一下目录查找：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$CWD/supervisord.conf</div><div class="line">$CWD/etc/supervisord.conf</div><div class="line">/etc/supervisord.conf</div><div class="line">/etc/supervisor/supervisord.conf(since Supervisor 3.3.0)</div><div class="line">../etc/supervisord.conf (Relative to the executeable)</div><div class="line">../supervisord.conf (Relative to the executeable)</div></pre></td></tr></table></figure></p>
-<p>$CWD表示运行supervisord程序的目录</p>
-<p>使用<code>echo_supervisord_conf</code>命令可以在终端输出默认的配置信息，此时重定向到我们要的文件便可，如下所示:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mkdir /etc/supervisor</span></div><div class="line"><span class="comment"># echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</span></div></pre></td></tr></table></figure></p>
-<h3 id="四、启动supervisord"><a href="#四、启动supervisord" class="headerlink" title="四、启动supervisord"></a>四、启动supervisord</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># supervisord -c /etc/supervisor/supervisord.conf</span></div></pre></td></tr></table></figure>
-<h3 id="五、配置管理进程"><a href="#五、配置管理进程" class="headerlink" title="五、配置管理进程"></a>五、配置管理进程</h3><p>要让supervisor来管理我们开发的应用程序，就需要为我们的程序编写一个配置文件。每个进程的配置文件可以写在<code>/etc/supervisor/supervisord.conf</code>, 也可以单独分拆，放在<code>/etc/supervisor/conf.d/</code>目录下，以<code>.conf</code>作为扩展名。<br>不过建议每个进程的编写属于自己的配置文件，放在include指定的目录下包含进supervisord.conf文件中。<br>操作如下：</p>
-<ol>
-<li>创建<code>/etc/supervisor/config.d</code>目录，用于存放进程管理的配置文件</li>
-<li>修改<code>/etc/supervisor/supervisord.conf</code>中的<strong>[include]</strong>参数，将<code>/etc/supervisor/config.d</code>目录添加到<strong>[include]</strong>中</li>
-</ol>
-<p>例如，app.conf定义了一个gunicorn的进程：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># mkdir /etc/supervisor/conf.d</span></div><div class="line"><span class="comment"># cd /etc/supervisor/conf.d</span></div><div class="line"><span class="comment"># vim gunicorn.conf</span></div></pre></td></tr></table></figure></p>
-<p>gunicorn.conf内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[program:app]</div><div class="line">command=/usr/bin/gunicorn -w 1 wsgiapp:application</div><div class="line">directory=/home/myproject</div><div class="line">user=www-data</div></pre></td></tr></table></figure></p>
-<p>进程app定义在<code>[program:app]</code>，<strong>app</strong>这个名称我们自定义，下面的启动命令会使用到<br><code>directory</code>是进程的当前目录<br><code>user</code>是进程运行的用户身份</p>
-<h3 id="六、运行命令supervisorctl"><a href="#六、运行命令supervisorctl" class="headerlink" title="六、运行命令supervisorctl"></a>六、运行命令<strong>supervisorctl</strong></h3><p>启动进程:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># supervisorctl start app</span></div></pre></td></tr></table></figure></p>
-<p>停止进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># supervisorctl stop app</span></div></pre></td></tr></table></figure></p>
-<p>查询状态<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># supervisorctl status app</span></div></pre></td></tr></table></figure></p>
-<h3 id="七、开机启动Supervisor服务-额外知识点"><a href="#七、开机启动Supervisor服务-额外知识点" class="headerlink" title="七、开机启动Supervisor服务(额外知识点)"></a>七、开机启动Supervisor服务(额外知识点)</h3><p>进入<code>/lib/systemd/system</code>目录，并创建<code>supervisor.service</code>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=supervisor</div><div class="line">After=network.target</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=forking</div><div class="line">ExecStart=/usr/bin/supervisord -c /etc/supervisor/supervisord.conf</div><div class="line">ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown</div><div class="line">ExecReload=/usr/bin/supervisorctl $OPTIONS reload</div><div class="line">KillMode=process</div><div class="line">Restart=on-failure</div><div class="line">RestartSec=42s</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure></p>
-<h4 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># systemctl enable supervisor.service</span></div><div class="line"><span class="comment"># systemctl daemon-reload</span></div></pre></td></tr></table></figure>
-<h4 id="马上启动"><a href="#马上启动" class="headerlink" title="马上启动"></a>马上启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># systemctl start supervisor.service</span></div></pre></td></tr></table></figure>
-<h3 id="更多详细内容，请前往官网http-www-supervisord-org"><a href="#更多详细内容，请前往官网http-www-supervisord-org" class="headerlink" title="更多详细内容，请前往官网http://www.supervisord.org/"></a>更多详细内容，请前往官网<a href="http://www.supervisord.org/" target="_blank" rel="external">http://www.supervisord.org/</a></h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/23/Linux后台进程管理利器：supervisor/" data-id="cj9id8ldf0000y6p5ihxsuap3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/23/hello-world/" class="article-date">
-  <time datetime="2017-09-23T08:05:28.000Z" itemprop="datePublished">2017-09-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/23/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<h3 id="完成后快速部署"><a href="#完成后快速部署" class="headerlink" title="完成后快速部署"></a>完成后快速部署</h3><p>让Hexo在生成完毕后自动部署网站，以下两个命令的作用是相同的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo generate --deploy <span class="comment">#简写 hexo g -d</span></div><div class="line"><span class="comment"># 或者</span></div><div class="line">$ hexo deploy --generate <span class="comment">#简写 hexo d -g</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://u-fish.cn/2017/09/23/hello-world/" data-id="cj9id8ldt0005y6p5999psah9" class="article-share-link">Share</a>
+      <a data-url="http://u-fish.cn/2017/09/26/关于xcode9编译出现Static-assert错误/" data-id="cjfkhzh8h000ggkp5o3kunsro" class="article-share-link">Share</a>
       
       
     </footer>
@@ -445,6 +542,10 @@
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -453,7 +554,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">6</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/Hadoop/">Hadoop</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/">移动端</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/移动端/iOS/">iOS</a><span class="category-list-count">6</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -468,7 +569,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">7</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -481,23 +582,23 @@
       <ul>
         
           <li>
+            <a href="/2018/04/04/使用MapReduce开发WordCount应用程序/">使用MapReduce开发WordCount应用程序</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/Java-API-操作Hadoop系统/">Java API 操作Hadoop系统</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/Hadoop-shell常用操作/">Hadoop shell常用操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/搭建单节点伪分布式Hadoop系统/">Hadoop伪分布式系统单机版环境搭建</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/02/iOS-监听系统键盘的出现和消失/">iOS监听系统键盘的出现和消失</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/28/iOS-block的基础用法/">iOS-block的基础用法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/27/iOS-枚举类型-enum-NS-ENUM-NS-OPTIONS/">iOS-枚举类型 NS_ENUM, NS_OPTIONS</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/27/iOS-UITableViewCell选中时上面的View看不见/">iOS-UITableViewCell选中时上面的View看不见</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/26/iOS-UIButton文字居左显示/">iOS-UIButton文字居左显示</a>
           </li>
         
       </ul>
@@ -512,7 +613,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 Xiaohua<br>
+      &copy; 2018 Xiaohua<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
